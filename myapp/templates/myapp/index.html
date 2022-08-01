@@ -1,9 +1,35 @@
 {% extends "base/index.html" %}
+{% load static %}
+
+
 
 {% block title %}
   My App
 {% endblock title %}
 
+
+{% block css %}
+  <link rel="stylesheet" href="{% static 'myapp/css/style.css' %}">
+{% endblock css %}
+
 {% block content %}
-  <h1>My App</h1>
+  <h1>My App, <span class="test">Test</span></h1>
+
+  <div class="card-columns">
+    {% for flower in flowers  %}
+    <div class="card">
+      <div class="card-body">
+        <h5 class="card-title">{{ flower.title }}</h5>
+        <p class="card-text">{{ flower.description | truncatechars:100 }}</p>
+        <a href="/admin/myapp/flower/{{ flower.id }}/change/" class="card-link">Edit</a>
+        <a href="/admin/myapp/flower/{{ flower.id }}/delete/" class="card-link">Delete</a>
+      </div>
+    </div>
+    {% endfor %}
+  </div>
 {% endblock content %}
+
+
+{% block js %}
+  <script src="{% static 'myapp/js/app.js' %}"></script>
+{% endblock js %}
