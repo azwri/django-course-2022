@@ -19,7 +19,10 @@
     {% for flower in flowers  %}
     <div class="card">
       <div class="card-body">
-        <h5 class="card-title">{{ flower.title }}</h5>
+        <h5 class="card-title">
+          <!-- <a href="{% url 'myapp:detail' flower.slug  %}">{{ flower.title }}</a> -->
+          <a href="{{ flower.get_absolute_url }}">{{ flower.title }}</a>
+        </h5>
         <p class="card-text">{{ flower.description | truncatechars:100 }}</p>
         <a href="/admin/myapp/flower/{{ flower.id }}/change/" class="card-link">Edit</a>
         <a href="/admin/myapp/flower/{{ flower.id }}/delete/" class="card-link">Delete</a>

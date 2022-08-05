@@ -1,0 +1,16 @@
+{% extends "base/index.html" %}
+
+{% block title %}
+    {{ flower.title }}
+{% endblock title %}
+
+
+
+{% block content %}
+    <div class="container">
+        <h1 class="display-3">{{ flower.title }}</h1>
+        <div class="lead">{{ flower.description }}</div>
+    </div>
+
+    <a href="{% url 'myapp:index' %}">Back</a>
+{% endblock content %}

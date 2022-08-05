@@ -14,6 +14,19 @@ def index(request: Request):
     return render(request=request,template_name='myapp/index.html', context=context)
 
 
+def detail(request: Request, slug: str):
+    flower = get_object_or_404(Flower, slug=slug)
+    contentx = {'flower': flower}
+    return render(request=request, template_name='myapp/detail.html', context=contentx)
+
+
+
+
+
+
+
+# api
+
 @api_view(['POST'])
 def add_flower_api(request: Request):
     flower = FlowerSerializer(data=request.data)
