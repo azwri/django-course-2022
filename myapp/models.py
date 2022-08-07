@@ -10,6 +10,7 @@ class Flower(models.Model):
     description = models.TextField()
     user = models.ForeignKey(User, on_delete=models.CASCADE)
     slug = models.SlugField(blank=True, default='', unique=True)
+    category = models.ForeignKey('Category', on_delete=models.PROTECT, null=True)
 
     def __str__(self):
         return self.title
@@ -22,3 +23,23 @@ class Flower(models.Model):
     
     def get_absolute_url(self):
         return reverse('myapp:detail', kwargs={'slug': self.slug})
+
+class Category(models.Model):
+    name = models.CharField( max_length=255)
+    slug = models.SlugField(blank=True, default='', unique=True)
+    user = models.ForeignKey(User, on_delete=models.CASCADE)
+    
+    def __str__(self) -> str:
+        return self.name
+    
+
+    def save(self, *args, **kwargs):
+        self.slug = slugify(self.name + \
+            datetime.now().strftime("-%Y-%m-%d-%H-%M%-%S-") + \
+            f'{self.user.id}')
+        
+        super().save()
+        
+
+    def get_absolute_url(self):
+        return reverse('myapp:category', kwargs={'slug': self.slug})

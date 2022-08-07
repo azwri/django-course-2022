@@ -1,0 +1,21 @@
+{% extends "base/index.html" %} {% block title %} Category {% endblock title %}
+{% block content %}
+
+<div class="card-columns">
+  {% for cat in category %}
+  <div class="card">
+    <div class="card-title">
+      {{ cat.name }}
+    </div>
+    <div class="card-body">
+      <ul>
+        {% for flower in cat.flower_set.all %}
+            <li>{{ flower.title }}</li>
+        {% endfor %}
+      </ul>
+    </div>
+  </div>
+  {% endfor %}
+</div>
+
+{% endblock content %}
