@@ -12,6 +12,16 @@
         <div class="lead">{{ flower.description }}</div>
     </div>
 
+    <div>
+            <a href='{% url "myapp:category_detail" flower.category.slug %}'>{{ flower.category }}</a>
+    </div>
+
+    <div>
+        {% for tag in flower.tags.all %}
+            <a href="{% url 'myapp:tag_detail' tag.slug  %}">{{ tag.title }}</a>
+        {% endfor %}
+    </div>
+
     
     <br /><br />
     <div class="container">

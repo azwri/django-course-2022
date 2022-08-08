@@ -4,7 +4,7 @@ from rest_framework.decorators import api_view
 from rest_framework import status
 from django.shortcuts import render, get_object_or_404
 from .serializers import FlowerSerializer
-from .models import Flower, Category
+from .models import Flower, Category, Tag
 
 
 def index(request: Request):
@@ -25,9 +25,16 @@ def category(request: Request):
     return render(request=request, template_name='myapp/category.html', context=context)
     
 
+def category_detail(request: Request, slug: str):
+    category = get_object_or_404(Category, slug=slug)
+    context = {'category': category}
+    return render(request=request, template_name='myapp/category_detail.html', context=context)
 
 
-
+def tag_detail(request: Request, slug: str):
+    tag = get_object_or_404(Tag, slug=slug)
+    context = {'tag': tag}
+    return render(request=request, template_name='myapp/tag_detail.html', context=context)
 
 # api
 

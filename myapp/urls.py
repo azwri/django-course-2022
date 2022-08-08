@@ -1,5 +1,5 @@
 from django.urls import path
-from .views import index, detail,category
+from .views import index, detail,category, category_detail, tag_detail
 from .views import add_flower_api, get_flower_api
 
 
@@ -9,6 +9,8 @@ urlpatterns = [
     path('', index, name='index'),
     path('flower/<slug:slug>/', detail, name='detail'),
     path('flower/category/all/', category, name='category'),
+    path('flower/category/<slug:slug>/', category_detail, name='category_detail'),
+    path('flower/tag/<slug:slug>/', tag_detail, name='tag_detail'),
 
 
     # api
